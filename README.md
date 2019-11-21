@@ -1,6 +1,6 @@
 ## User
 ### POST
-rout `host/users`
+rout [host/users]()
 
 ```
 {
