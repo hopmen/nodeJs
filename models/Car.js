@@ -24,5 +24,5 @@ class Car extends Model {
 
 }
 
-new Car().createSchema();
+new Car().createSchema().catch(e => console.error(e));
 module.exports = new Car();

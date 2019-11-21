@@ -28,5 +28,5 @@ class User extends Model {
 
 }
 
-new User().createSchema();
+new User().createSchema().catch(e => console.error(e));
 module.exports = new User();

@@ -5,7 +5,7 @@ module.exports = class Model {
     this._nameDb = nameDb;
   }
 
-  createSchema () {
+  async createSchema () {
 
     const textQuery = `CREATE TABLE IF NOT EXISTS ${this._nameDb} (
     ${Object
@@ -14,7 +14,7 @@ module.exports = class Model {
       .map(i => `${i} ${this[i]}`)
       .join(', ')
     });`;
-    pool.query(textQuery,
+    await pool.query(textQuery,
       [],
       (err) => {
         if (err) {
