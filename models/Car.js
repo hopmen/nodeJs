@@ -1,6 +1,5 @@
 const pool = require('../db');
 const Model = require('./Model');
-console.log(Model);
 
 class Car extends Model {
   constructor () {
@@ -14,14 +13,12 @@ class Car extends Model {
 
   getCarsOfMakeWithoutUser (make, cb) {
     const textQuery = `SELECT * from cars WHERE LOWER(car_make) = '${make}' and user_id IS NULL`;
-    console.log(textQuery);
     return pool.query(textQuery, cb);
   }
 
   addUser (userId, carsId, cb) {
     const textQuery = `UPDATE cars SET user_id = ${userId} 
         WHERE id = ${carsId} AND user_id IS NULL`;
-    console.log(textQuery);
     return pool.query(textQuery, cb)
   }
 

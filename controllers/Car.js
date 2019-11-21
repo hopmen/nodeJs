@@ -16,7 +16,7 @@ module.exports = class CarController {
   }
 
   delete (req, res) {
-    Car.delete(req.body.CarId, (err, result) => {
+    Car.delete(req.params.id, (err, result) => {
       if (err) {
         res.sendStatus(500);
         return console.error('Error executing query', err.stack);
@@ -26,7 +26,7 @@ module.exports = class CarController {
   }
 
   update (req, res) {
-    Car.update(req.body, (err, result) => {
+    Car.update(req.params.id, req.body, (err, result) => {
       if (err) {
         res.sendStatus(500);
         return console.error('Error executing query', err.stack);
@@ -49,18 +49,20 @@ module.exports = class CarController {
   }
 
   getCarsOfMakeWithoutUser (req, res) {
-    console.log(req.params.make);
     Car.getCarsOfMakeWithoutUser (req.params.make.toLowerCase(), (err, result) => {
       if (err) {
         res.sendStatus(500);
         return console.error('Error executing query', err.stack);
+      }
+      if (result.rows.length === 0) {
+        res.sendStatus(404);
+        return;
       }
       res.send(result.rows);
     });
   }
 
   addUser (req, res) {
-    console.log(req.body);
     Car.addUser(req.body.user_id, req.params.id, (err, result) => {
       if (err) {
         res.sendStatus(500);

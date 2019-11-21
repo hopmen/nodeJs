@@ -16,7 +16,7 @@ module.exports = class UserController {
   }
 
   delete (req, res) {
-    User.delete(req.body.userId, (err, result) => {
+    User.delete(req.params.id, (err, result) => {
       if (err) {
         res.sendStatus(500);
         return console.error('Error executing query', err.stack);
@@ -26,7 +26,7 @@ module.exports = class UserController {
   }
 
   update (req, res) {
-    User.update(req.body, (err, result) => {
+    User.update(req.params.id, req.body, (err, result) => {
       if (err) {
         res.sendStatus(500);
         return console.error('Error executing query', err.stack);
@@ -57,7 +57,7 @@ module.exports = class UserController {
       if (result.rows.length === 0) {
         res.sendStatus(404);
       }
-      res.send(result.rows[0]);
+      res.send(result.rows);
     });
   }
 

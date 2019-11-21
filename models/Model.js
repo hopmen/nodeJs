@@ -38,13 +38,11 @@ module.exports = class Model {
     pool.query(textQuery, cb);
   }
 
-  update (row, cb) {
+  update (id, row, cb) {
     const textQuery = `UPDATE ${this._nameDb} SET ${
       Object.keys(row)
-        .filter(i => i !== 'id')
         .map(i => `${i} = '${row[i]}'`)
-        .join(',')} WHERE id = ${row.id};`;
-
+        .join(',')} WHERE id = ${id};`;
     pool.query(textQuery, cb);
   }
 
